@@ -1,19 +1,16 @@
 # Cool Calculator
 
-A responsive, framework-free calculator built with HTML, CSS, and JavaScript. Choose from three distinct visual styles, switch between light and dark themes, and calculate with a mouse, touchscreen, or keyboard.
+Cool Calculator is a responsive, framework-free calculator with three distinct visual styles, light and dark themes, and support for mouse, touchscreen, and keyboard input.
 
 ## Live Demo
 
-[Try the calculator](https://kyraofx.github.io/simple-calculator/)
+[Try Cool Calculator](https://kyraofx.github.io/cool-calculator/)
 
 ## Features
 
 - Addition, subtraction, multiplication, and division
 - Percentage, decimal, clear, and delete controls
-- Three visual styles:
-  - **Nexus** — futuristic
-  - **Aegis** — medieval
-  - **Mochi** — kawaii
+- Three visual styles: Nexus, Aegis, and Mochi
 - Light and dark themes for every style
 - Automatic system-theme detection
 - Style and theme preferences saved between visits
@@ -34,10 +31,20 @@ A responsive, framework-free calculator built with HTML, CSS, and JavaScript. Ch
 
 ## Built With
 
-- HTML5
-- CSS3
+- HTML
+- CSS
 - Vanilla JavaScript
-- Google Fonts
+- [Google Fonts](https://fonts.google.com/)
+
+## Project Structure
+
+```text
+cool-calculator/
+├── index.html
+├── styles.css
+├── script.js
+└── README.md
+```
 
 ## Run Locally
 
@@ -46,9 +53,15 @@ No build step or package installation is required.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/kyraofx/simple-calculator.git
+   git clone https://github.com/kyraofx/cool-calculator.git
    ```
 
-2. Open `index.html` in your browser.
+2. Open the project folder:
 
-An internet connection is only needed to load the hosted Google Fonts; the calculator itself runs entirely in the browser.
+   ```bash
+   cd cool-calculator
+   ```
+
+3. Open `index.html` in your browser.
+
+An internet connection is only required to load Google Fonts; the calculator itself runs entirely in the browser.
