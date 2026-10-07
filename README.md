@@ -1,4 +1,4 @@
-# Simple Calculator
+# Cool Calculator
 
 A responsive, framework-free calculator built with HTML, CSS, and JavaScript. Choose from three distinct visual styles, switch between light and dark themes, and calculate with a mouse, touchscreen, or keyboard.
 
