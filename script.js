@@ -1,6 +1,122 @@
 const resultDisplay = document.querySelector("#result");
 const historyDisplay = document.querySelector("#history");
 const keys = document.querySelector(".keys");
+const themeToggle = document.querySelector("#theme-toggle");
+const themeColor = document.querySelector('meta[name="theme-color"]');
+const styleOptions = document.querySelectorAll("[data-style-option]");
+const calculatorName = document.querySelector("#calculator-name");
+const displayStatus = document.querySelector("#display-status");
+
+const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+let hasSavedTheme = false;
+
+const styleDetails = {
+  nexus: {
+    name: "Nexus",
+    status: "SYS / READY",
+    lightThemeColor: "#e9edef",
+    darkThemeColor: "#050908",
+  },
+  aegis: {
+    name: "Aegis",
+    status: "RUNES / READY",
+    lightThemeColor: "#d8c6a7",
+    darkThemeColor: "#0e0906",
+  },
+  mochi: {
+    name: "Mochi",
+    status: "SWEET / READY",
+    lightThemeColor: "#fff0f6",
+    darkThemeColor: "#190d17",
+  },
+};
+
+function getSavedStyle() {
+  try {
+    const savedStyle = window.localStorage.getItem("calculator-style");
+    return styleDetails[savedStyle] ? savedStyle : "nexus";
+  } catch {
+    return "nexus";
+  }
+}
+
+function updateThemeColor() {
+  const style = document.documentElement.dataset.style || "nexus";
+  const isDark = document.documentElement.dataset.theme === "dark";
+  themeColor.content = isDark
+    ? styleDetails[style].darkThemeColor
+    : styleDetails[style].lightThemeColor;
+}
+
+function applyStyle(style, savePreference = false) {
+  const selectedStyle = styleDetails[style] ? style : "nexus";
+  const details = styleDetails[selectedStyle];
+
+  document.documentElement.dataset.style = selectedStyle;
+  calculatorName.textContent = details.name;
+  displayStatus.textContent = details.status;
+  document.title = `${details.name} Calculator`;
+
+  styleOptions.forEach((option) => {
+    const isSelected = option.dataset.styleOption === selectedStyle;
+    option.classList.toggle("is-selected", isSelected);
+    option.setAttribute("aria-pressed", String(isSelected));
+  });
+
+  updateThemeColor();
+
+  if (savePreference) {
+    try {
+      window.localStorage.setItem("calculator-style", selectedStyle);
+    } catch {
+      // The selected style still applies when storage is unavailable.
+    }
+  }
+}
+
+function getSavedTheme() {
+  try {
+    const savedTheme = window.localStorage.getItem("calculator-theme");
+    hasSavedTheme = savedTheme === "light" || savedTheme === "dark";
+    return hasSavedTheme ? savedTheme : null;
+  } catch {
+    return null;
+  }
+}
+
+function applyTheme(theme, savePreference = false) {
+  const isDark = theme === "dark";
+
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  themeToggle.setAttribute("aria-checked", String(isDark));
+  themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
+  updateThemeColor();
+
+  if (savePreference) {
+    hasSavedTheme = true;
+    try {
+      window.localStorage.setItem("calculator-theme", isDark ? "dark" : "light");
+    } catch {
+      // The selected theme still applies when storage is unavailable.
+    }
+  }
+}
+
+applyStyle(getSavedStyle());
+applyTheme(getSavedTheme() ?? (systemTheme.matches ? "dark" : "light"));
+
+styleOptions.forEach((option) => {
+  option.addEventListener("click", () => applyStyle(option.dataset.styleOption, true));
+});
+
+themeToggle.addEventListener("click", () => {
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme, true);
+});
+
+systemTheme.addEventListener("change", (event) => {
+  if (!hasSavedTheme) applyTheme(event.matches ? "dark" : "light");
+});
 
 let currentValue = "0";
 let storedValue = null;

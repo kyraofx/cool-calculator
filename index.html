@@ -1,15 +1,70 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-style="nexus">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple four-function calculator." />
-    <title>Simple Calculator</title>
+    <meta name="description" content="A calculator with futuristic, medieval, and kawaii styles, each with light and dark themes." />
+    <meta name="theme-color" content="#071210" />
+    <title>Nexus Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&amp;family=Orbitron:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="calculator" aria-label="Calculator">
+      <header class="calculator__header">
+        <div class="brand" aria-hidden="true">
+          <span class="brand__signal"></span>
+          <span id="calculator-name">Nexus</span>
+          <span class="brand__edition">Calculator</span>
+        </div>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label="Switch to dark mode"
+        >
+          <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <circle cx="12" cy="12" r="3.5"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+            </svg>
+          </span>
+          <span class="theme-toggle__track" aria-hidden="true">
+            <span class="theme-toggle__thumb"></span>
+          </span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M20.2 15.1A8.4 8.4 0 0 1 8.9 3.8 8.4 8.4 0 1 0 20.2 15.1Z"></path>
+            </svg>
+          </span>
+        </button>
+      </header>
+
+      <nav class="style-picker" aria-label="Calculator style">
+        <button class="style-option is-selected" type="button" data-style-option="nexus" aria-pressed="true">
+          <span class="style-option__glyph" aria-hidden="true">◇</span>
+          <span>Nexus</span>
+        </button>
+        <button class="style-option" type="button" data-style-option="aegis" aria-pressed="false">
+          <span class="style-option__glyph" aria-hidden="true">✦</span>
+          <span>Aegis</span>
+        </button>
+        <button class="style-option" type="button" data-style-option="mochi" aria-pressed="false">
+          <span class="style-option__glyph" aria-hidden="true">♡</span>
+          <span>Mochi</span>
+        </button>
+      </nav>
+
       <div class="display" aria-live="polite" aria-atomic="true">
+        <span class="display__status" id="display-status" aria-hidden="true">SYS / READY</span>
         <div id="history" class="history">&nbsp;</div>
         <output id="result">0</output>
       </div>
